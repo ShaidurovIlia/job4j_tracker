@@ -9,14 +9,15 @@ public class Jukebox {
             System.out.print("Пусть бегут неуклюже");
         } else if (position == 2) {
                 System.out.println("Спокойной ночи");
-            } else {
+        } else {
                  System.out.println("Песня не найдена");
-            }
         }
+    }
 
     public static void main(String[] args) {
         Jukebox emma = new Jukebox();
-        int song = 1;
-        emma.music(song);
+        emma.music(1);
+        emma.music(2);
+        emma.music(3);
     }
 }
