@@ -31,12 +31,11 @@ public class Point {
             + pow(this.y - that.y, 2) + pow(this.z - that.z, 2));
     }
 
-
     public static void main(String[] args) {
         Point a = new Point(0, 0);
         Point b = new Point(0, 2);
         Point One = new Point(0, 0, 2);
-        Point Two = new Point(2, 0,0);
+        Point Two = new Point(2, 0, 0);
         double dist = a.distance(b);
         double dist3d = One.distance3d(Two);
         System.out.println(dist);

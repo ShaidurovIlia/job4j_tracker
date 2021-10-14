@@ -6,8 +6,8 @@ public class Programmer extends Engineer {
 
     private boolean calm;
 
-    public Programmer(String name, String surname, String education
-            , int birthday) {
+    public Programmer(String name, String surname, String education,
+                      int birthday) {
         super(name, surname, education, birthday);
         this.structural = structural;
         this.calm = calm;

@@ -17,7 +17,7 @@ public class Error {
         this.message = message;
     }
 
-    public void printInfo(){
+    public void printInfo() {
         System.out.println("Активный: " + active  + System.lineSeparator() + "Статус: " + status
                 + System.lineSeparator() + "Сообщение: " + message);
     }
