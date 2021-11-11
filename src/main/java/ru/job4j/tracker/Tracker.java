@@ -48,7 +48,7 @@ public class Tracker {
        int index = indexOf(id);
        item.setId(id);
        items[index] = item;
-       return index == -1;
+       return true;
     }
 
     public boolean delete(int id) {
