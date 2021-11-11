@@ -87,4 +87,15 @@ public class TrackerTest {
         tracker.delete(id);
         assertThat(tracker.findById(id), is(nullValue()));
     }
+
+    @Test
+    public void whenDeleteTwo() {
+        Tracker tracker = new Tracker();
+        Item rabbit = new Item();
+        rabbit.setName("rabbit");
+        tracker.add(rabbit);
+        int id = rabbit.getId();
+        tracker.delete(id);
+        assertThat(tracker.findById(id), is(nullValue()));
+    }
 }
