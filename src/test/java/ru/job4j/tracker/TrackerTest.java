@@ -92,7 +92,7 @@ public class TrackerTest {
     public void whenDeleteTwo() {
         Tracker tracker = new Tracker();
         Item rabbit = new Item();
-        rabbit.setName("rabbit");
+        rabbit.setName("hare");
         tracker.add(rabbit);
         int id = rabbit.getId();
         tracker.delete(id);
