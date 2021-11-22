@@ -9,6 +9,7 @@ public class PolyUsage {
         Vehicle[] vehicle = new Vehicle[] {plane, train, bus};
         for (Vehicle m : vehicle) {
             m.move();
+            m.speed();
         }
     }
 }
