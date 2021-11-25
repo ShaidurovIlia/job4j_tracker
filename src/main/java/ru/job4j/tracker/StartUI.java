@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.lang.module.FindException;
+
 public class StartUI {
     public static void createItem(Input input, Tracker tracker) {
         System.out.println("=== Create a new Item ===");
@@ -9,7 +11,7 @@ public class StartUI {
         System.out.println("Добавленная заявка: " + item);
     }
 
-    public static void showAllItems(Input input, Tracker tracker) {
+    public static void findAllItems(Input input, Tracker tracker) {
         System.out.println("=== Show all items ===");
         Item[] items = tracker.findAll();
         if (items.length > 0) {
@@ -34,7 +36,7 @@ public class StartUI {
     }
 
     public static void deleteItem(Input input, Tracker tracker) {
-        System.out.println("=== Delete item ===");
+        System.out.println("=== Delete an item ===");
         int id = input.askInt("Enter id: ");
         if (tracker.delete(id)) {
             System.out.println("Заявка удалена успешно.");
@@ -67,44 +69,47 @@ public class StartUI {
         }
     }
 
-    public void init(Input input, Tracker tracker) {
-        boolean run = true;
-        while (run) {
-            this.showMenu();
-            int select = input.askInt("Select: ");
-            if (select == 0) {
-                StartUI.createItem(input, tracker);
-            } else if (select == 1) {
-                StartUI.showAllItems(input, tracker);
-            } else if (select == 2) {
-                StartUI.editItem(input, tracker);
-            } else if (select == 3) {
-                StartUI.deleteItem(input, tracker);
-            } else if (select == 4) {
-                StartUI.findItemById(input, tracker);
-            } else if (select == 5) {
-               StartUI.findItemByName(input, tracker);
-            } else if (select == 6) {
-                run = false;
-            }
+    public static void replace(Input input, Tracker tracker) {
+        System.out.println("=== Edit item ===");
+        int id = input.askInt("Enter id: ");
+        String name = input.askStr("Enter name: ");
+        Item item = new Item(name);
+        if (tracker.replace(id, item)) {
+            System.out.println("Item edit success");
+        } else {
+            System.out.println("System error");
         }
     }
 
-        private void showMenu() {
-            String[] menu = {
-                    "Add new Item", "Show all items", "Edit item",
-                    "Delete item", "Find item by id", "Find items by name",
-                    "Exit Program"
-            };
+    public void init(Input input, Tracker tracker, UserAction[] actions) {
+        boolean run = true;
+        while (run) {
+            this.showMenu(actions);
+            int select = input.askInt("Select: ");
+            UserAction action = actions[select];
+            run = action.execute(input, tracker);
+        }
+    }
+
+        private void showMenu(UserAction[] actions) {
             System.out.println("Menu:");
-            for (int i = 0; i < menu.length; i++) {
-                System.out.println(i + ". " + menu[i]);
+            for (int i = 0; i < actions.length; i++) {
+                System.out.println(i + ". " + actions[i].name());
             }
         }
 
-        public static void main(String[]args) {
+        public static void main(String[] args) {
             Input input = new ConsoleInput();
             Tracker tracker = new Tracker();
-            new StartUI().init(input, tracker);
+            UserAction[] actions = {
+                    new CreateAction(),
+                    new FindAllAction(),
+                    new ReplaceAction(),
+                    new DeleteAction(),
+                    new FindByIdAction(),
+                    new FindByNameAction(),
+                    new ExitAction()
+            };
+            new StartUI().init(input, tracker, actions);
         }
     }
