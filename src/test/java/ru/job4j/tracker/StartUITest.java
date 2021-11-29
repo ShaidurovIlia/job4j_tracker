@@ -5,7 +5,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
 
-public class StartUlTest {
+public class StartUITest {
 
     @Test
     public void whenCreateItem() {
@@ -17,7 +17,7 @@ public class StartUlTest {
                 new CreateAction(),
                 new ExitAction()
         };
-        new StartUl().init(in, tracker, actions);
+        new StartUI().init(in, tracker, actions);
         assertThat(tracker.findAll()[0].getName(), is("Item name"));
     }
 
@@ -33,7 +33,7 @@ public class StartUlTest {
                 new ReplaceAction(),
                 new ExitAction()
         };
-        new StartUl().init(in, tracker, actions);
+        new StartUI().init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
     }
 
@@ -48,7 +48,7 @@ public class StartUlTest {
                 new DeleteAction(),
                 new ExitAction()
         };
-        new StartUl().init(in, tracker, actions);
+        new StartUI().init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
 }
