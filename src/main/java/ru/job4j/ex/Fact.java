@@ -6,7 +6,7 @@ public class Fact {
             throw new IllegalArgumentException("N should be bigger 0");
         }
         int rsl = 1;
-        for (int i = 1; i <= n; i++) {
+        for (int i = 2; i <= n; i++) {
             rsl *= i;
 
         }
