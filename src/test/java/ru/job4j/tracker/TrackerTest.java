@@ -98,4 +98,114 @@ public class TrackerTest {
         tracker.delete(id);
         assertThat(tracker.findById(id), is(nullValue()));
     }
+
+    @Test
+    public void whenReplaceItemTest() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one = tracker.add(new Item("test1"));
+        String replaceName = "New Test Name";
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(one.getId()), replaceName, "1"}
+        );
+        UserAction[] actions = new UserAction[] {
+                new ReplaceAction(out),
+                new ExitAction(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu:" + ln
+                        + "0. Edit item" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Edit item ===" + ln
+                        + "Заявка изменена успешно." + ln
+                        + "Menu:" + ln
+                        + "0. Edit item" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Exit Program ===" + ln
+        ));
+    }
+
+    @Test
+    public void whenFindAllActionItemTest() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item item = new Item("test1");
+        tracker.add(item);
+        Input in = new StubInput(
+                new String[] {"0", "1"}
+        );
+        UserAction[] actions = new UserAction[] {
+                new FindAllAction(out),
+                new ExitAction(out)
+
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu:" + ln
+                + "0. Show all items" + ln
+                + "1. Exit Program" + ln
+                + "=== Show all items ===" + ln
+                + item + ln + "Menu:" + ln
+                + "0. Show all items" + ln
+                + "1. Exit Program" + ln
+                +  "=== Exit Program ===" + ln
+        ));
+    }
+
+    @Test
+    public void whenFindByNameActionTest() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item item = new Item("test");
+        tracker.add(item);
+        Input in = new StubInput(
+                new String[] {"0", "test", "1"}
+        );
+        UserAction[] actions = new UserAction[] {
+                new FindByNameAction(out),
+                new ExitAction(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu:" + ln
+                + "0. Find item by name" + ln
+                + "1. Exit Program" + ln
+                + "=== Find item by name ===" + ln
+                + item + ln + "Menu:" + ln
+                + "0. Find item by name" + ln
+                + "1. Exit Program" + ln
+                + "=== Exit Program ===" + ln
+        ));
+    }
+
+    @Test
+    public void whenFindByIdActionTest() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item item = new Item("test");
+        tracker.add(item);
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(item.getId()), "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new FindByIdAction(out),
+                new ExitAction(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu:" + ln
+                        + "0. Find item by id" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Find item by id ===" + ln
+                        + item + ln + "Menu:" + ln
+                        + "0. Find item by id" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Exit Program ===" + ln
+        ));
+    }
 }
