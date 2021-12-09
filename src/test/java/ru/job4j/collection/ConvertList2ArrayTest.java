@@ -8,8 +8,8 @@ import java.util.Arrays;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-@Ignore
 public class ConvertList2ArrayTest {
+
     @Test
     public void when7ElementsThen9() {
         int[][] result = ConvertList2Array.toArray(
@@ -22,5 +22,35 @@ public class ConvertList2ArrayTest {
                 {7, 0, 0}
         };
         assertThat(result, is(expect));
+    }
+
+    @Test
+    public void when10ElementsThen12() {
+        int[][] result =  ConvertList2Array.toArray(
+                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                4
+        );
+        int[][] expected = {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 0, 0},
+
+        };
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void when8ElementsThen8() {
+        int[][] result =  ConvertList2Array.toArray(
+                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8),
+                2
+        );
+        int[][] expected = {
+                {1, 2},
+                {3, 4},
+                {5, 6},
+                {7, 8}
+        };
+        assertThat(result, is(expected));
     }
 }
