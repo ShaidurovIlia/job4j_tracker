@@ -18,7 +18,7 @@ public class ItemDescByNameTest {
         Item second = new Item("Tanya");
         Item three = new Item("Olga");
         List<Item> items = Arrays.asList(first, second, three);
-        List<Item> expected = Arrays.asList(first, three, second);
+        List<Item> expected = Arrays.asList(second, three, first);
         Collections.sort(items, new ItemDescByName());
         assertThat(items, is(expected));
     }
@@ -29,7 +29,7 @@ public class ItemDescByNameTest {
         Item second = new Item("Tanya");
         Item three = new Item("Olga");
         List<Item> items = Arrays.asList(first, second, three);
-        List<Item> expected = Arrays.asList(second, three, first);
+        List<Item> expected = Arrays.asList(first, three, second);
         Collections.sort(items, new ItemAscByName());
         assertThat(items, is(expected));
     }
