@@ -1,5 +1,6 @@
 package ru.job4j.search;
 
+import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -21,12 +22,10 @@ public class PhoneDictionaryTest {
     @Test
     public void whenFindNothing() {
         PhoneDictionary phones = new PhoneDictionary();
-        ArrayList<Person> expected = new ArrayList<Person>();
         phones.add(
                 new Person("Petr", "Arsentev", "534543", "Bryansk")
         );
         ArrayList<Person> persons = phones.find("Oleg");
-        assertThat(persons,
-                is(expected));
+        assertThat(persons, IsEmptyCollection.empty());
     }
 }
