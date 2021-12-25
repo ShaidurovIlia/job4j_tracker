@@ -69,7 +69,7 @@ public class JobTest {
 
     @Test
     public void whenComparatorByNameAndPriorityEquallyNameAscPriority() {
-        Comparator<Job> cmpNamePriority = new JobAscByName().thenComparing(new JonAscByPriority());
+        Comparator<Job> cmpNamePriority = new JobAscByName().thenComparing(new JobAscByPriority());
         int rsl = cmpNamePriority.compare(
                 new Job("Impl task", 0),
                 new Job("Impl task", 1)
