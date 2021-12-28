@@ -34,10 +34,10 @@ public class Point {
     public static void main(String[] args) {
         Point a = new Point(0, 0);
         Point b = new Point(0, 2);
-        Point One = new Point(0, 0, 2);
-        Point Two = new Point(2, 0, 0);
+        Point one = new Point(0, 0, 2);
+        Point two = new Point(2, 0, 0);
         double dist = a.distance(b);
-        double dist3d = One.distance3d(Two);
+        double dist3d = one.distance3d(two);
         System.out.println(dist);
         System.out.println(dist3d);
     }
