@@ -1,20 +1,25 @@
 package ru.job4j.search;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class PhoneDictionary {
-    private ArrayList<Person> person = new ArrayList<Person>();
+    private ArrayList<Person> persons = new ArrayList<>();
 
     public void add(Person person) {
-        this.person.add(person);
+        this.persons.add(person);
     }
 
     public ArrayList<Person> find(String key) {
+        Predicate<Person> predName = (s) -> s.getName().equals(key);
+        Predicate<Person> predSurName = (s) -> s.getSurname().equals(key);
+        Predicate<Person> predPhone = (s) -> s.getPhone().equals(key);
+        Predicate<Person> predAdress = (s) -> s.getAddress().equals(key);
+        Predicate<Person> combine = predName.or(predSurName).or(predPhone).or(predAdress);
         ArrayList<Person> result = new ArrayList<>();
-        for (Person pers : person) {
-            if (pers.getName().contains(key) || pers.getSurname().contains(key)
-                    || pers.getPhone().contains(key) || pers.getAddress().contains(key)) {
-                result.add(pers);
+        for (Person person: persons) {
+            if (combine.test(person)) {
+                result.add(person);
             }
         }
         return result;
