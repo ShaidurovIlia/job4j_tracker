@@ -2,7 +2,7 @@ package ru.job4j.bank;
 
 import org.junit.Test;
 
-import javax.lang.model.element.UnknownAnnotationValueException;
+import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -14,7 +14,7 @@ public class BankServiceTest {
         User user = new User("2323", "Ilya Shaidurov");
         BankService bank = new BankService();
         bank.addUser(user);
-        assertThat(bank.findByPassport("2323"), is(user));
+        assertThat(bank.findByPassport("2323").get(), is(user));
     }
 
     @Test
@@ -23,7 +23,7 @@ public class BankServiceTest {
         BankService bank = new BankService();
         bank.addUser(user);
         bank.addAccount(user.getPassport(), new Account("4422", 234D));
-        assertNull(bank.findByRequisite("21", "4422"));
+        assertThat(bank.findByRequisite("21", "4422"), is(Optional.empty()));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class BankServiceTest {
         BankService bank = new BankService();
         bank.addUser(user);
         bank.addAccount(user.getPassport(), new Account("4422", 234D));
-        assertThat(bank.findByRequisite("2323", "4422").getBalance(), is(234D));
+        assertThat(bank.findByRequisite("2323", "4422").get().getBalance(), is(234D));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class BankServiceTest {
         bank.addAccount(user.getPassport(), new Account("50", 10D));
         bank.transferMoney(user.getPassport(), "4422",
                 user.getPassport(), "50", 100D);
-        assertThat(bank.findByRequisite(user.getPassport(), "50").getBalance(), is(110D));
+        assertThat(bank.findByRequisite(user.getPassport(), "50").get().getBalance(), is(110D));
     }
 
     @Test
@@ -76,6 +76,6 @@ public class BankServiceTest {
         bank.addUser(user);
         bank.addAccount(user.getPassport(), new Account("1111", 234D));
         bank.addAccount(user.getPassport(), new Account("1122", 300D));
-        assertThat(bank.findByRequisite("2323", "1122").getBalance(), is(300D));
+        assertThat(bank.findByRequisite("2323", "1122").get().getBalance(), is(300D));
     }
 }
