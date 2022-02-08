@@ -9,6 +9,6 @@ public class DepDescComp implements Comparator<String> {
         String firstSlash01 = o1.split("/")[0];
         String firstSlash02 = o2.split("/")[0];
         int rsl = firstSlash02.compareTo(firstSlash01);
-        return rsl == 0 ? o1.compareTo(o2) : firstSlash02.compareTo(firstSlash01);
+        return rsl == 0 ? o1.compareTo(o2) : rsl;
     }
 }
