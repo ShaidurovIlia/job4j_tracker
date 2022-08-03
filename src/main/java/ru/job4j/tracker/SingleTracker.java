@@ -4,8 +4,8 @@ import java.util.List;
 
 public final class SingleTracker {
 
+    private MemTracker tracker = new MemTracker();
     private static SingleTracker instance = null;
-    private Tracker tracker = new Tracker();
 
     private SingleTracker() {
     }

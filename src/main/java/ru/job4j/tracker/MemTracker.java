@@ -3,8 +3,10 @@ package ru.job4j.tracker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tracker {
+public class MemTracker implements Store {
+
     private final List<Item> items = new ArrayList<>();
+
     private int ids = 1;
 
     public Item add(Item item) {
@@ -17,10 +19,10 @@ public class Tracker {
         return new ArrayList<>(items);
     }
 
-    public List<Item> findByName(String kay) {
+    public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         for (Item item : items) {
-            if (item.getName().equals(kay)) {
+            if (key.equals(item.getName())) {
                 result.add(item);
             }
         }
