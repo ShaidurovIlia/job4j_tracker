@@ -110,7 +110,8 @@ public class MemTrackerTest {
         Item one = tracker.add(new Item("test1"));
         String replaceName = "New Test Name";
         Input in = new StubInput(
-                new String[]{"0", String.valueOf(one.getId()), replaceName, "1"}
+                new String[]{"0", String.valueOf(one.getId()),
+                        replaceName, "1"}
         );
         List<UserAction> actions = Arrays.asList(
                 new ReplaceAction(out),

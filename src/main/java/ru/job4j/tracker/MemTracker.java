@@ -31,7 +31,8 @@ public class MemTracker implements Store {
 
     public Item findById(int id) {
         int index = indexOf(id);
-        return index != -1 ? items.get(index) : null;
+        return index != -1 ? items
+                .get(index) : null;
     }
 
     private int indexOf(int id) {
